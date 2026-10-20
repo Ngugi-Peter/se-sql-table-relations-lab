@@ -12,10 +12,10 @@ pd.read_sql("""SELECT * FROM sqlite_master""", conn)
 # =====================================================================
 
 # STEP 1
-# First and last names and job titles for all employees in Boston
+# First name and job title for all employees in Boston
 df_boston = pd.read_sql(
     """
-    SELECT e.firstName, e.lastName, e.jobTitle
+    SELECT e.firstName, e.jobTitle
     FROM employees AS e
     JOIN offices AS o
         ON e.officeCode = o.officeCode
@@ -194,6 +194,7 @@ df_under_20 = pd.read_sql(
         GROUP BY od2.productCode
         HAVING COUNT(DISTINCT o2.customerNumber) < 20
     )
+    ORDER BY e.lastName, e.firstName
     """,
     conn,
 )
